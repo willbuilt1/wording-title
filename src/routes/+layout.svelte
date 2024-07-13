@@ -1,17 +1,18 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
   let { children }: { children: Snippet } = $props();
+  import '../reset.css'
+  import '../app.css';
+  import '$lib/styles/typography.css';
 </script>
 
-<body>
-  {@render children()}
-  <!-- <slot /> -->Hello
-</body>
 
-<style>
-  body {
-    font-family: "Arial", sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-</style>
+
+
+  {@render children()}
+
+
+
+
+
+

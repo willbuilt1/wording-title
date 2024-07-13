@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300..700&display=swap');
+
+:root{
+    /* Colors */
+    --primary-black: #161616;
+    --primary-white: #ffffff;
+    --primary-color: #FF6A00;
+
+    /* Fonts */
+    --primary-font: 'Exo 2', sans-serif;
+    --secondary-font: 'Signika Negative', serif;
+
+}
+
+body{
+    background-color: var(--primary-black);
+    color: var(--primary-white);
+    font-family: var(--primary-font);
+}
+
+h1,h2,h3{
+    font-family: var(--secondary-font);
+}
+
+a{
+    color: var(--primary-black);
+    text-decoration: none;
+}
+
+
+
