@@ -1,19 +1,10 @@
-<script>
-  import Button from "$lib/components/Button.svelte";
-</script>
-
 <main>
   <h1 class="title">A Wording Title</h1>
   <h2 class="subtitle">The word guessing game</h2>
 
   <div class="buttons">
-    <Button>
-      <a href="/categories">Quick Start</a>
-    </Button>
-
-    <Button>
-      <a href="/login">Login</a>
-    </Button>
+    <a href="/categories" class="button">Quick Start</a>
+    <a href="/login" class="button">Login</a>
   </div>
 </main>
 

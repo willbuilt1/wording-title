@@ -1,8 +1,8 @@
 .title{
-        font-size: 56px;
+        font-size: var(--font-size-xxxlarge);
         line-height: 1.2;
 }
 
 .subtitle{
-        font-size: 32px;
+        font-size: var(--font-size-xlarge);
 }

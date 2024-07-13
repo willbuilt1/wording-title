@@ -1,8 +1,53 @@
+<script lang="ts">
+  import Card from "$lib/components/Card.svelte";
+  import type { PageData } from "./$types";
+  export let data: PageData;
+
+  const categoryColors = ["red", "yellow", "green", "blue", "purple"];
+  function getCategoryColor(index: number) {
+    return categoryColors[index % categoryColors.length];
+  }
+</script>
+
 <h2 class="subtitle">Choose your category</h2>
+<div class="container">
+  {#each data.categories as category, i}
+    <a href={`/game/${category.name}?colour=${getCategoryColor(i)}`}>
+      <Card --color={getCategoryColor(i)}>
+        <div class="icon">{category.icon}</div>
+        <div class="name">{category.name}</div>
+      </Card>
+    </a>
+  {/each}
+</div>
 
 <style>
   h2 {
-    margin-top: 16px;
+    margin-top: var(--unit-large);
     text-align: center;
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--unit-large);
+    margin-top: var(--unit-large);
+
+    :global(.card) {
+      aspect-ratio: 1 / 1;
+      max-height: 200px;
+    }
+  }
+
+  .icon {
+    font-size: var(--font-size-large);
+  }
+
+  .name {
+    text-transform: capitalize;
+    font-family: var(--primary-font);
+    font-size: var(--font-size-large);
+    font-weight: 700;
+    justify-self: baseline;
   }
 </style>

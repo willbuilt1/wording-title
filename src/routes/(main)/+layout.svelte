@@ -9,7 +9,7 @@
 <style>
   nav {
     border-bottom: solid 1px var(--primary-white);
-    padding: 8px 16px;
+    padding: 16px;
   }
   main {
     padding-left: 16px;
