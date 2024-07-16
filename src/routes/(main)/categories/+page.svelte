@@ -14,8 +14,10 @@
   {#each data.categories as category, i}
     <a href={`/game/${category.name}?colour=${getCategoryColor(i)}`}>
       <Card --color={getCategoryColor(i)}>
-        <div class="icon">{category.icon}</div>
-        <div class="name">{category.name}</div>
+        <div class="cardContent">
+          <div class="icon">{category.icon}</div>
+          <div class="name">{category.name}</div>
+        </div>
       </Card>
     </a>
   {/each}
@@ -37,6 +39,17 @@
       aspect-ratio: 1 / 1;
       max-height: 200px;
     }
+  }
+
+  .cardContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color, var(--primary-color));
+    color: var(--primary-black);
+    cursor: pointer;
+    height: 100%;
   }
 
   .icon {
