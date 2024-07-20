@@ -12,6 +12,7 @@
 <h2 class="subtitle">Choose your category</h2>
 <div class="container">
   {#each data.categories as category, i}
+    <!--Move colour to game state -->
     <a href={`/game/${category.name}?colour=${getCategoryColor(i)}`}>
       <Card --color={getCategoryColor(i)}>
         <div class="cardContent">
