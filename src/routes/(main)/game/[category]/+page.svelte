@@ -1,7 +1,7 @@
 <script lang="ts">
   import Card from "$lib/components/Card.svelte";
   import type { PageData } from "./$types";
-  import Timer from "$lib/utils/timer.svelte";
+  import Timer from "$lib/state/timer.svelte";
   import Pause from "$lib/icons/Pause.svelte";
   import Play from "$lib/icons/Play.svelte";
 

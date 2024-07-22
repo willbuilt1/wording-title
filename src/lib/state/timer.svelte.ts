@@ -4,6 +4,7 @@ import { onDestroy } from "svelte";
 class Timer {
   duration: number;
   interval: any;
+
   timerState = $state<ITimer>({
     duration: 0,
     timeLeft: 0,

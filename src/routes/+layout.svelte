@@ -5,6 +5,9 @@
   import "../app.css";
   import "$lib/styles/typography.css";
   import "$lib/styles/components.css";
+  import { setGameState } from "$lib/state/gameState.svelte";
+
+  setGameState();
 </script>
 
 {@render children()}

@@ -3,3 +3,8 @@ export interface ITimer {
   timeLeft: number;
   status: "started" | "paused" | "stopped" | "finished";
 }
+
+export interface IGameState {
+  lives?: number;
+  timerLength: number;
+}
