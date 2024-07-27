@@ -4,8 +4,7 @@
 
 import { browser } from "$app/environment";
 import type { IGameState } from "$lib/types";
-import { getContext, onMount, setContext } from "svelte";
-import { get } from "svelte/store";
+import { getContext, setContext } from "svelte";
 
 const getStateFromStorage = () => {
   if (browser) {

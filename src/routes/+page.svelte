@@ -4,6 +4,7 @@
 
   <div class="buttons">
     <a href="/categories" class="button">Quick Start</a>
+    <a href="/settings" class="button">Settings</a>
     <a href="/login" class="button">Login</a>
   </div>
 </main>
