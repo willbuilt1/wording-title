@@ -5,6 +5,7 @@ export interface ITimer {
 }
 
 export interface IGameState {
-  lives?: number;
   timerLength: number;
+  lives?: number;
+  color?: string;
 }

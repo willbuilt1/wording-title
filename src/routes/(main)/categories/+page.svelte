@@ -1,7 +1,10 @@
 <script lang="ts">
   import Card from "$lib/components/Card.svelte";
   import type { PageData } from "./$types";
+  import { getGameState } from "$lib/state/gameState.svelte";
   export let data: PageData;
+
+  const gameState = getGameState();
 
   const categoryColors = ["red", "yellow", "green", "blue", "purple"];
   function getCategoryColor(index: number) {
@@ -12,8 +15,10 @@
 <h2 class="subtitle">Choose your category</h2>
 <div class="container">
   {#each data.categories as category, i}
-    <!--Move colour to game state -->
-    <a href={`/game/${category.name}?colour=${getCategoryColor(i)}`}>
+    <a
+      href={`/game/${category.name}`}
+      onclick={() => gameState.setColor(getCategoryColor(i))}
+    >
       <Card --color={getCategoryColor(i)}>
         <div class="cardContent">
           <div class="icon">{category.icon}</div>

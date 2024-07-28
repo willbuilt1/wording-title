@@ -11,7 +11,7 @@
   let { data } = $props<{ data: PageData }>();
 
   const gameState = getGameState();
-  const { lives, timerLength } = gameState.gameState;
+  const { lives, timerLength, color } = gameState.gameState;
 
   // timer logic
   const timer = new Timer(timerLength);
@@ -68,7 +68,7 @@
     {/each}
   </div>
 </section>
-<Card --color={data.colour}>
+<Card --color={color}>
   <div class="cardContent">{word ?? ""}</div>
 </Card>
 <div class="buttonContainer">

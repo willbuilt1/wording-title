@@ -11,12 +11,14 @@ const getStateFromStorage = () => {
     const gameSettings = localStorage.getItem("gameSettings");
     let lives: number;
     let timerLength: number;
+    let color: string | undefined;
 
     if (gameSettings) {
       const parsedSettings = JSON.parse(gameSettings) as IGameState;
       lives = parsedSettings.lives || 3;
       timerLength = parsedSettings.timerLength || 60;
-      return { lives, timerLength };
+      color = parsedSettings.color || undefined;
+      return { lives, timerLength, color };
     }
   }
   return { lives: 3, timerLength: 60 };
@@ -37,6 +39,10 @@ export class gameState {
 
   setTimerLength(timerLength: number) {
     if (this.gameState) this.gameState.timerLength = timerLength;
+  }
+
+  setColor(color: string) {
+    if (this.gameState) this.gameState.color = color;
   }
 }
 
