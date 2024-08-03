@@ -29,7 +29,7 @@
   const words = $state(data.words);
   let word = $state(getRandomWord());
   let score = $state(0);
-  let numberOfLives = $state(lives ?? 3);
+  let numberOfLives = $state(lives);
 
   function getRandomWord() {
     return words[Math.floor(Math.random() * words.length)];
@@ -46,7 +46,7 @@
   }
 
   function handleWrong() {
-    numberOfLives -= 1;
+    if (numberOfLives) numberOfLives -= 1;
     handleAnswer();
   }
 
@@ -62,12 +62,15 @@
 <section>
   <div class="score">{score}</div>
   <div class="time">{timerState.timeLeft}<span>seconds</span></div>
-  <div class="lives">
-    {#each Array.from({ length: numberOfLives }, (_, i) => i) as _}
-      <span>❤️</span>
-    {/each}
-  </div>
+  {#if numberOfLives}
+    <div class="lives">
+      {#each Array.from({ length: numberOfLives }, (_, i) => i) as _}
+        <span>❤️</span>
+      {/each}
+    </div>
+  {/if}
 </section>
+<h3>{data.category}</h3>
 <Card --color={color}>
   <div class="cardContent">{word ?? ""}</div>
 </Card>
@@ -98,7 +101,6 @@
   section {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    padding-top: var(--unit-large);
     padding-bottom: var(--unit-xxlarge);
     align-items: center;
     line-height: 1;
@@ -110,6 +112,15 @@
       text-align: right;
     }
   }
+  h3 {
+    text-align: center;
+    font-size: var(--font-size-large);
+    font-weight: 700;
+    text-transform: uppercase;
+    padding-bottom: var(--unit-large);
+    margin-top: var(--unit-large);
+    /* color: var(--primary-black) */
+  }
   .cardContent {
     text-transform: capitalize;
     font-size: var(--font-size-large);
@@ -117,6 +128,7 @@
     text-align: center;
     padding-top: var(--unit-xxxlarge);
     padding-bottom: var(--unit-xxxlarge);
+    font-weight: 700;
   }
 
   .score {
@@ -143,17 +155,17 @@
     justify-content: space-between;
     align-items: center;
     gap: var(--unit-large);
-    margin-top: var(--unit-xxlarge);
+    margin-top: var(--unit-xxxlarge);
     text-align: center;
 
     &:has(button:disabled) {
-      color: grey;
+      color: var(--primary-grey);
     }
   }
 
   .gameButton {
     color: var(--primary-white);
-    background-color: grey;
+    background-color: var(--primary-grey);
     border: none;
     border-radius: var(--unit-small);
     height: 60px;

@@ -1,10 +1,11 @@
 <script lang="ts">
+  import Back from "$lib/icons/Back.svelte";
   import type { Snippet } from "svelte";
   let { children } = $props<{ children: Snippet }>();
 </script>
 
 <nav>
-  <button onclick={() => history.back()}>{"<"}</button>
+  <button onclick={() => history.back()}><Back size={"24"} /></button>
   <a class="logo" href="/">WT</a>
 </nav>
 <main>{@render children()}</main>
@@ -32,5 +33,6 @@
   main {
     padding-left: 16px;
     padding-right: 16px;
+    padding-top: var(--unit-xlarge);
   }
 </style>

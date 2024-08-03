@@ -5,8 +5,9 @@
 :root{
     /* Colors */
     --primary-black: #161616;
-    --primary-white: #ffffff;
+    --primary-white: beige;
     --primary-color: #FF6A00;
+    --primary-grey: #808080;
 
     /* Fonts */
     --primary-font: 'Exo 2', sans-serif;
@@ -37,9 +38,7 @@ body{
     font-family: var(--primary-font);
 }
 
-h1,h2,h3{
-    font-family: var(--secondary-font);
-}
+
 
 a{
     color: var(--primary-black);

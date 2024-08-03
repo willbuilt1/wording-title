@@ -10,7 +10,10 @@
 <style>
   .card {
     border-radius: var(--unit-medium);
-    background-color: var(--color, var(--primary-color));
+    border: solid 4px var(--color, var(--primary-color));
+    background-color: var(--primary-white);
     padding: var(--unit-medium);
+    outline: solid 4px var(--primary-white);
+    overflow: hidden;
   }
 </style>

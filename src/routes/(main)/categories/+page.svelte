@@ -6,7 +6,7 @@
 
   const gameState = getGameState();
 
-  const categoryColors = ["red", "yellow", "green", "blue", "purple"];
+  const categoryColors = ["red", "gold", "green", "blue", "purple"];
   function getCategoryColor(index: number) {
     return categoryColors[index % categoryColors.length];
   }
@@ -31,7 +31,6 @@
 
 <style>
   h2 {
-    margin-top: var(--unit-large);
     text-align: center;
   }
 
@@ -52,10 +51,22 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: var(--color, var(--primary-color));
+    background-color: var(--primary-white);
     color: var(--primary-black);
     cursor: pointer;
     height: 100%;
+
+    * {
+      filter: grayscale();
+    }
+
+    &:hover *,
+    &:focus *,
+    &:active * {
+      filter: none;
+      transform: scale(1.2);
+      transition: all ease-in-out 0.2s;
+    }
   }
 
   .icon {

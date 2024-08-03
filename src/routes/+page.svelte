@@ -1,6 +1,6 @@
 <main>
-  <h1 class="title">A Wording Title</h1>
-  <h2 class="subtitle">The word guessing game</h2>
+  <h1 class="headline">A Wording Title</h1>
+  <h2>The word guessing game</h2>
 
   <div class="buttons">
     <a href="/categories" class="button">Quick Start</a>
