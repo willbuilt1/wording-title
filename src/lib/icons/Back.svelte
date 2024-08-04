@@ -1,5 +1,8 @@
-<script>
-  let { color = "white", size = "auto" } = $props();
+<script lang="ts">
+  let {
+    color = "white",
+    size = undefined,
+  }: { color?: string; size?: number | string } = $props();
 </script>
 
 <svg

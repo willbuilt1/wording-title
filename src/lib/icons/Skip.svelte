@@ -1,5 +1,5 @@
 <script>
-  let { color = "white", size = "auto" } = $props();
+  let { color = "white", size = undefined } = $props();
 </script>
 
 <svg

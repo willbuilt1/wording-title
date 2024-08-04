@@ -3,7 +3,7 @@
 // timer length
 
 import { browser } from "$app/environment";
-import type { IGameState } from "$lib/types";
+import type { IGameSettings } from "$lib/types";
 import { getContext, setContext } from "svelte";
 
 const getStateFromStorage = () => {
@@ -14,7 +14,7 @@ const getStateFromStorage = () => {
     let color: string | undefined;
 
     if (gameSettings) {
-      const parsedSettings = JSON.parse(gameSettings) as IGameState;
+      const parsedSettings = JSON.parse(gameSettings) as IGameSettings;
       lives = parsedSettings.lives || 3;
       timerLength = parsedSettings.timerLength || 60;
       color = parsedSettings.color || undefined;
@@ -25,7 +25,7 @@ const getStateFromStorage = () => {
 };
 
 export class gameState {
-  gameState = $state<IGameState>(getStateFromStorage());
+  gameState = $state<IGameSettings>(getStateFromStorage());
 
   constructor() {
     $effect(() => {

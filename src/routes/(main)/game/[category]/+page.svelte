@@ -7,25 +7,37 @@
   import { getGameState } from "$lib/state/gameState.svelte";
   import Check from "$lib/icons/Check.svelte";
   import Skip from "$lib/icons/Skip.svelte";
+  import Modal from "$lib/components/Modal.svelte";
+  import GameModal from "$lib/components/GameModal.svelte";
+  import type { TGameStatus } from "$lib/types";
 
   let { data } = $props<{ data: PageData }>();
+  let showModal = $state(true);
+  let gameStatus: TGameStatus = $state("initial");
 
-  const gameState = getGameState();
-  const { lives, timerLength, color } = gameState.gameState;
+  const gameSettings = getGameState();
+  const { lives, timerLength, color } = gameSettings.gameState;
 
   // timer logic
   const timer = new Timer(timerLength);
   const timerState = timer.timerState;
-
+  $effect(() => {
+    gameOver();
+  });
   function startTimer() {
     timer.start();
+    gameStatus = "running";
+    showModal = false;
   }
 
   function pauseTimer() {
+    gameStatus = "paused";
+    showModal = true;
     timer.pause();
   }
 
   // game logic
+  // TODO: refactor to use a store
   const words = $state(data.words);
   let word = $state(getRandomWord());
   let score = $state(0);
@@ -37,6 +49,7 @@
 
   function handleAnswer() {
     words.splice(words.indexOf(word), 1);
+    gameOver();
     word = getRandomWord();
   }
 
@@ -47,6 +60,7 @@
 
   function handleWrong() {
     if (numberOfLives) numberOfLives -= 1;
+    gameOver();
     handleAnswer();
   }
 
@@ -54,7 +68,8 @@
 
   function gameOver() {
     if (lives === 0 || words.length === 0 || timerState.status === "finished") {
-      return true;
+      gameStatus = "finished";
+      showModal = true;
     }
   }
 </script>
@@ -96,6 +111,14 @@
     <div>Got it</div>
   </div>
 </div>
+<Modal bind:showModal>
+  <GameModal
+    modalType={gameStatus}
+    closeModal={() => (showModal = false)}
+    startGame={startTimer}
+    {score}
+  />
+</Modal>
 
 <style>
   section {
@@ -119,7 +142,6 @@
     text-transform: uppercase;
     padding-bottom: var(--unit-large);
     margin-top: var(--unit-large);
-    /* color: var(--primary-black) */
   }
   .cardContent {
     text-transform: capitalize;

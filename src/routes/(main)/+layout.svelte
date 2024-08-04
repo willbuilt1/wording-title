@@ -12,7 +12,7 @@
 
 <style>
   nav {
-    border-bottom: solid 1px var(--primary-white);
+    border-bottom: solid 1px var(--primary-color);
     padding: 16px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);

@@ -30,11 +30,12 @@ class Timer {
     this.interval = setInterval(() => {
       if (this.timerState.timeLeft > 0) {
         this.timerState.timeLeft--;
-      } else {
-        this.stop();
-        this.timerState.status = "finished";
+        if (this.timerState.timeLeft === 0) {
+          this.stop();
+          this.timerState.status = "finished";
+        }
       }
-    }, 1000);
+    }, 10);
   }
 
   pause() {
