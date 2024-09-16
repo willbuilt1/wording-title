@@ -1,4 +1,5 @@
 <script lang="ts">
+  import AnimatedRoute from "$lib/components/AnimatedRoute.svelte";
   import Back from "$lib/icons/Back.svelte";
   import type { Snippet } from "svelte";
   let { children } = $props<{ children: Snippet }>();
@@ -8,7 +9,7 @@
   <button onclick={() => history.back()}><Back size={"24"} /></button>
   <a class="logo" href="/">WT</a>
 </nav>
-<main>{@render children()}</main>
+<AnimatedRoute><main>{@render children()}</main></AnimatedRoute>
 
 <style>
   nav {
@@ -34,5 +35,7 @@
     padding-left: 16px;
     padding-right: 16px;
     padding-top: var(--unit-xlarge);
+    max-width: 480px;
+    margin: 0 auto;
   }
 </style>

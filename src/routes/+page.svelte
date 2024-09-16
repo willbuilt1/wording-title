@@ -1,5 +1,5 @@
-<main>
-  <h1 class="headline">A Wording Title</h1>
+<main class="fadeIn">
+  <h1 class="headline">Wording Title</h1>
   <h2>The word guessing game</h2>
 
   <div class="buttons">
@@ -11,7 +11,6 @@
 
 <style>
   main {
-    margin-top: 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,6 +18,7 @@
     padding-left: 16px;
     padding-right: 16px;
     text-align: center;
+    height: 100vh;
   }
 
   h2 {

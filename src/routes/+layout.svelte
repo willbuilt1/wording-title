@@ -5,6 +5,7 @@
   import "../app.css";
   import "$lib/styles/typography.css";
   import "$lib/styles/components.css";
+  import "$lib/styles/animations.css";
   import { setGameState } from "$lib/state/gameState.svelte";
 
   setGameState();

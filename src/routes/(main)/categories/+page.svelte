@@ -37,12 +37,15 @@
   .container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--unit-large);
+    gap: var(--unit-xlarge);
     margin-top: var(--unit-large);
+    flex: 1;
 
-    :global(.card) {
+    a {
       aspect-ratio: 1 / 1;
-      max-height: 200px;
+    }
+    :global(.card) {
+      height: 100%;
     }
   }
 

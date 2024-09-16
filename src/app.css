@@ -38,12 +38,11 @@ body{
     font-family: var(--primary-font);
 }
 
-
-
 a{
     color: var(--primary-black);
     text-decoration: none;
 }
+
 
 
 
