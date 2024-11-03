@@ -52,34 +52,37 @@
   .cardContent {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
+    padding-bottom: var(--unit-xxlarge);
     align-items: center;
-    background-color: var(--primary-white);
     color: var(--primary-black);
     cursor: pointer;
     height: 100%;
+    position: relative;
 
     * {
       filter: grayscale();
     }
 
-    &:hover *,
-    &:focus *,
-    &:active * {
-      filter: none;
+    &:hover .icon,
+    &:focus .icon,
+    &:active .icon {
+      filter: grayscale();
       transform: scale(1.2);
       transition: all ease-in-out 0.2s;
     }
   }
 
   .icon {
-    font-size: var(--font-size-large);
+    font-size: 70px;
+    line-height: 1;
+    filter: blur(3px) grayscale();
   }
 
   .name {
     text-transform: capitalize;
     font-family: var(--primary-font);
-    font-size: var(--font-size-large);
+    font-size: var(--font-size-xlarge);
     font-weight: 700;
     justify-self: baseline;
   }
