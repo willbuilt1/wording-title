@@ -1,5 +1,5 @@
 import type { PageServerLoad } from "./$types";
-import { words } from "$lib/db/db";
+import { words } from "$lib/localDb/db";
 
 export const load = (async ({ params, url }) => {
   const category = params.category as keyof typeof words;

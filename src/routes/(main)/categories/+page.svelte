@@ -1,10 +1,9 @@
 <script lang="ts">
-  import { fade, scale } from "svelte/transition";
   import Card from "$lib/components/Card.svelte";
   import type { PageData } from "./$types";
   import { getGameState } from "$lib/state/gameState.svelte";
   export let data: PageData;
-
+  console.log(data);
   const gameState = getGameState();
 
   const categoryColors = ["red", "gold", "green", "blue", "purple"];
