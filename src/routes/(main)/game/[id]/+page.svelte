@@ -44,7 +44,7 @@
   let numberOfLives = $state(lives);
 
   function getRandomWord() {
-    return words[Math.floor(Math.random() * words.length)];
+    return words[Math.floor(Math.random() * words.length)].word;
   }
 
   function handleAnswer() {

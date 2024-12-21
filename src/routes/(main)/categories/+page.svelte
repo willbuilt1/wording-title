@@ -16,7 +16,7 @@
 <div class="container">
   {#each data.categories as category, i}
     <a
-      href={`/game/${category.name}`}
+      href={`/game/${category.id}`}
       onclick={() => gameState.setColor(getCategoryColor(i))}
     >
       <Card --color={getCategoryColor(i)}>
