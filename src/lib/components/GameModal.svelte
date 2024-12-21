@@ -1,5 +1,4 @@
 <script lang="ts">
-  import Card from "$lib/components/Card.svelte";
   import Timer from "$lib/state/timer.svelte";
   import type { TGameStatus } from "$lib/types";
   let { closeModal, startGame, modalType, score } = $props<{
@@ -28,63 +27,56 @@
 </script>
 
 {#snippet initial()}
-  <button class="containerButton" onclick={() => countdownTimer.start()}>
-    <Card>
-      <div class="container">
-        <h2>Ready?</h2>
-        {#if countdownTimer.timerState.status === "started"}
-          <div class="countdown big">
-            {countdownTimer.timerState.timeLeft}
-          </div>
-        {:else if countdownTimer.timerState.status === "finished"}
-          <div class="countdown big">Go!</div>
-        {:else}
-          <div class="countdown">Tap to start</div>
-        {/if}
+  <div class="container" onclick={() => countdownTimer.start()}>
+    <h2>Ready?</h2>
+    {#if countdownTimer.timerState.status === "started"}
+      <div class="countdown big">
+        {countdownTimer.timerState.timeLeft}
       </div>
-    </Card>
-  </button>
+    {:else if countdownTimer.timerState.status === "finished"}
+      <div class="countdown big">Go!</div>
+    {:else}
+      <div class="countdown">Tap to start</div>
+    {/if}
+  </div>
 {/snippet}
 
 {#snippet finished()}
-  <Card>
-    <div class="container">
-      <h2>Game Over</h2>
-      <p>Your score: {score}</p>
-      <button onclick={closeModal}>Close</button>
-    </div>
-  </Card>
+  <div class="container">
+    <h2>Game Over</h2>
+    <p>You scored</p>
+    <p>{score}</p>
+    <button onclick={closeModal}>Close</button>
+  </div>
 {/snippet}
 
 {#snippet paused()}
-  <Card>
-    <div class="container">
-      <h2>Game Paused</h2>
-      <button
-        class="button"
-        onclick={() => {
-          closeModal();
-          startGame();
-        }}>Close</button
-      >
-    </div>
-  </Card>
+  <div class="container">
+    <h2>Game Paused</h2>
+    <button
+      class="button"
+      onclick={() => {
+        closeModal();
+        startGame();
+      }}>Close</button
+    >
+  </div>
 {/snippet}
 
 {@render modalTypes[modalType as keyof typeof modalTypes]()}
 
 <style>
-  h2 {
-    text-align: center;
-  }
-  .containerButton {
-    background-color: transparent;
-    border: none;
-  }
-
   .container {
     padding: var(--unit-large);
     width: 80vw;
+    max-width: 100%;
+    background-color: var(--primary-white);
+    border-radius: var(--unit-medium);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--unit-large);
   }
 
   .countdown {

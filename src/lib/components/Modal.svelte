@@ -26,10 +26,10 @@
     padding: 4px;
     background: transparent;
     border: none;
-    /* position: absolute; */
-    top: 50%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
+    max-width: 480px;
 
     &::backdrop {
       background-color: rgba(77, 77, 77, 0.9);

@@ -10,9 +10,6 @@
 <style>
   .card {
     border-radius: var(--unit-medium);
-    /* border: solid 4px var(--color, var(--primary-color)); */
-    /* background-color: var(--primary-white); */
-    /* background: rgb(245, 245, 220); */
     background: linear-gradient(
       69deg,
       var(--primary-white) 0%,

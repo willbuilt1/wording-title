@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { fade, scale } from "svelte/transition";
   import Card from "$lib/components/Card.svelte";
   import type { PageData } from "./$types";
   import { getGameState } from "$lib/state/gameState.svelte";
@@ -21,7 +22,9 @@
     >
       <Card --color={getCategoryColor(i)}>
         <div class="cardContent">
-          <div class="icon">{category.icon}</div>
+          <div class="icon">
+            {category.icon}
+          </div>
           <div class="name">{category.name}</div>
         </div>
       </Card>
@@ -69,7 +72,7 @@
     &:active .icon {
       filter: grayscale();
       transform: scale(1.2);
-      transition: all ease-in-out 0.2s;
+      transition: all ease-in-out 0.3s;
     }
   }
 
@@ -77,6 +80,8 @@
     font-size: 70px;
     line-height: 1;
     filter: blur(3px) grayscale();
+    transform: scale(1);
+    transition: all ease-in-out 0.3s;
   }
 
   .name {

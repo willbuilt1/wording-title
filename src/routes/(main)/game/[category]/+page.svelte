@@ -86,9 +86,11 @@
   {/if}
 </section>
 <h3>{data.category}</h3>
-<Card --color={color}>
-  <div class="cardContent">{word ?? ""}</div>
-</Card>
+<div class="cardContainer">
+  <Card --color={color}>
+    <div class="cardContent">{word ?? ""}</div>
+  </Card>
+</div>
 <div class="buttonContainer">
   <div>
     <button class="gameButton" onclick={handleWrong} {disabled}><Skip /></button
@@ -143,13 +145,17 @@
     padding-bottom: var(--unit-large);
     margin-top: var(--unit-large);
   }
+  .cardContainer {
+    padding-inline: var(--unit-large);
+  }
   .cardContent {
     text-transform: capitalize;
     font-size: var(--font-size-large);
     color: var(--primary-black);
-    text-align: center;
-    padding-top: var(--unit-xxxlarge);
-    padding-bottom: var(--unit-xxxlarge);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
     font-weight: 700;
   }
 

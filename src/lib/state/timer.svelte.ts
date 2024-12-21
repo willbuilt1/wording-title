@@ -35,7 +35,7 @@ class Timer {
           this.timerState.status = "finished";
         }
       }
-    }, 10);
+    }, 1000);
   }
 
   pause() {
