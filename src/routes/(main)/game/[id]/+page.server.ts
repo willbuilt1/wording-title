@@ -1,5 +1,4 @@
 import type { PageServerLoad } from "./$types";
-import { words } from "$lib/localDb/db";
 import { db } from "$lib/db/index";
 import { eq } from "drizzle-orm";
 import { category, word, wordCategory } from "$lib/db/schema";

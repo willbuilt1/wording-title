@@ -6,7 +6,11 @@
 </script>
 
 {#key $page.url}
-  <div class="fadeIn">
+  {#if $page.url.pathname == "/create"}
     {@render children()}
-  </div>
+  {:else}
+    <div class="fadeIn">
+      {@render children()}
+    </div>
+  {/if}
 {/key}
