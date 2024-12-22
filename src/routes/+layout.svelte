@@ -1,13 +1,27 @@
 <script lang="ts">
-  import type { Snippet } from "svelte";
-  let { children }: { children: Snippet } = $props();
+  // import type { Snippet } from "svelte";
+  // let { children }: { children: Snippet } = $props();
   import "../reset.css";
   import "../app.css";
   import "$lib/styles/typography.css";
   import "$lib/styles/components.css";
   import "$lib/styles/animations.css";
   import { setGameState } from "$lib/state/gameState.svelte";
+  import { invalidate } from "$app/navigation";
+  import { onMount } from "svelte";
 
+  let { data, children } = $props();
+  let { session, supabase } = $derived(data);
+
+  onMount(() => {
+    const { data } = supabase.auth.onAuthStateChange((_, newSession) => {
+      if (newSession?.expires_at !== session?.expires_at) {
+        invalidate("supabase:auth");
+      }
+    });
+
+    return () => data.subscription.unsubscribe();
+  });
   setGameState();
 </script>
 
