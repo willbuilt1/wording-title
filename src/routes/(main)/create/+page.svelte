@@ -3,24 +3,24 @@
   import SuperDebug from "sveltekit-superforms";
 
   let { data } = $props();
-  // let word = $state("");
-  // let words = $state<string[]>([]);
+  let word = $state("");
   const { form, errors, constraints, message, enhance } = superForm(data.form, {
-    resetForm: false,
-    clearOnSubmit: "none",
+    dataType: "json",
+    onError({ result }) {
+      $message = result.error.message || "Unknown error";
+    },
   });
-  console.log($errors);
 
-  // function addWord() {
-  //   $form.words = [...$form.words, word];
-  //   word = "";
-  //   console.log($form.words);
-  // }
+  function addWord() {
+    $form.words = [...$form.words, word];
+    word = "";
+  }
 </script>
 
 <SuperDebug data={$form} />
 
 <h2>Name your category</h2>
+
 <form method="POST" use:enhance>
   <label for="category">Category</label>
   <input
@@ -45,13 +45,14 @@
 
   <!-- <input type="text" hidden bind:value={$form.words} /> -->
 
-  <!-- <h2>Add your words</h2>
+  <h2>Add your words</h2>
   <input
     type="text"
     bind:value={word}
     placeholder="single word or comma separated list"
+    max="100"
   />
-  <button onclick={addWord} type="button">Add</button> -->
+  <button onclick={addWord} type="button">Add</button>
 
   {#if $message}
     <div>{$message}</div>
