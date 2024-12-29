@@ -11,7 +11,7 @@ export const load = (async ({ params, url }) => {
   });
 
   const words = await db
-    .select({ word: word.word })
+    .select({ id: word.id, word: word.word })
     .from(wordCategory)
     .innerJoin(word, eq(wordCategory.wordId, word.id))
     .innerJoin(category, eq(wordCategory.categoryId, category.id))

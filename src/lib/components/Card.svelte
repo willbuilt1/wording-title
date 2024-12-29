@@ -15,6 +15,7 @@
       var(--primary-white) 0%,
       var(--color, var(--primary-color)) 100%
     );
+    height: 100%;
 
     /* outline: solid 4px var(--primary-white); */
     overflow: hidden;

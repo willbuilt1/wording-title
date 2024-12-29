@@ -23,6 +23,7 @@
     initial,
     paused,
     finished,
+    running,
   };
 </script>
 
@@ -62,6 +63,8 @@
     >
   </div>
 {/snippet}
+
+{#snippet running()}{/snippet}
 
 {@render modalTypes[modalType as keyof typeof modalTypes]()}
 

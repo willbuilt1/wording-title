@@ -10,10 +10,13 @@
   import Modal from "$lib/components/Modal.svelte";
   import GameModal from "$lib/components/GameModal.svelte";
   import type { TGameStatus } from "$lib/types";
+  import GameStack from "$lib/components/GameStack.svelte";
+  import { shuffleArray } from "$lib/helpers/helpers";
 
   let { data } = $props<{ data: PageData }>();
   let showModal = $state(true);
   let gameStatus: TGameStatus = $state("initial");
+  console.log(data);
 
   const gameSettings = getGameState();
   const { lives, timerLength, color } = gameSettings.gameState;
@@ -38,30 +41,25 @@
 
   // game logic
   // TODO: refactor to use a store
-  const words = $state(data.words);
-  let word = $state(getRandomWord());
+  const words = $state(shuffleArray(data.words));
   let score = $state(0);
   let numberOfLives = $state(lives);
+  let answerCorrect = $state<boolean>();
 
-  function getRandomWord() {
-    return words[Math.floor(Math.random() * words.length)].word;
-  }
-
-  function handleAnswer() {
-    words.splice(words.indexOf(word), 1);
+  function handleAnswer(correct: boolean) {
     gameOver();
-    word = getRandomWord();
+    answerCorrect = correct;
   }
 
   function handleCorrect() {
     score += 1;
-    handleAnswer();
+    handleAnswer(true);
   }
 
   function handleWrong() {
     if (numberOfLives) numberOfLives -= 1;
     gameOver();
-    handleAnswer();
+    handleAnswer(false);
   }
 
   const disabled = $derived(timerState.status !== "started" || lives === 0);
@@ -87,9 +85,7 @@
 </section>
 <h3>{data.category}</h3>
 <div class="cardContainer">
-  <Card --color={color}>
-    <div class="cardContent">{word ?? ""}</div>
-  </Card>
+  <GameStack cards={words} {color} {answerCorrect} />
 </div>
 <div class="buttonContainer">
   <div>
@@ -146,17 +142,12 @@
     margin-top: var(--unit-large);
   }
   .cardContainer {
-    padding-inline: var(--unit-large);
-  }
-  .cardContent {
-    text-transform: capitalize;
-    font-size: var(--font-size-large);
-    color: var(--primary-black);
+    width: 80vw;
+    height: 200px;
+    overflow: hidden;
+    margin: 0 auto;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 200px;
-    font-weight: 700;
   }
 
   .score {
