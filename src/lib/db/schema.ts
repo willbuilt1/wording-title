@@ -1,22 +1,22 @@
 import { bigint, integer, pgTable, text, varchar } from "drizzle-orm/pg-core";
 import { baseMixin } from "./mixins";
 
-export const word = pgTable("word", {
+export const wordTable = pgTable("word", {
   word: text("word"),
   ...baseMixin,
 });
 
-export const wordCategory = pgTable("word_category", {
+export const wordCategoryTable = pgTable("word_category", {
   wordId: bigint("word_id", { mode: "number" })
     .notNull()
-    .references(() => word.id),
+    .references(() => wordTable.id),
   categoryId: bigint("category_id", { mode: "number" })
     .notNull()
-    .references(() => category.id),
+    .references(() => categoryTable.id),
   ...baseMixin,
 });
 
-export const category = pgTable("category", {
+export const categoryTable = pgTable("category", {
   name: varchar("name").notNull(),
   icon: varchar("icon").notNull().default("❔"),
   ...baseMixin,

@@ -1,12 +1,16 @@
 import type { PageServerLoad } from "./$types";
 import { db } from "$lib/db/index";
-import { category } from "$lib/db/schema";
+import { categoryTable } from "$lib/db/schema";
 
 export const load = (async () => {
   const categories = await db
-    .select({ id: category.id, name: category.name, icon: category.icon })
-    .from(category)
-    .orderBy(category.id);
+    .select({
+      id: categoryTable.id,
+      name: categoryTable.name,
+      icon: categoryTable.icon,
+    })
+    .from(categoryTable)
+    .orderBy(categoryTable.id);
 
   return {
     categories,

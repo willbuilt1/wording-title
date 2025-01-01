@@ -4,9 +4,9 @@ import { z } from "zod";
 import { fail } from "@sveltejs/kit";
 import { db } from "$lib/db";
 import {
-  category as categorySchema,
-  word as wordSchema,
-  wordCategory as wordCategorySchema,
+  categoryTable as categorySchema,
+  wordTable as wordSchema,
+  wordCategoryTable as wordCategorySchema,
 } from "$lib/db/schema";
 
 // Define outside the load function so the adapter can be cached

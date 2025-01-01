@@ -1,21 +1,24 @@
 import type { PageServerLoad } from "./$types";
 import { db } from "$lib/db/index";
 import { eq } from "drizzle-orm";
-import { category, word, wordCategory } from "$lib/db/schema";
+import { categoryTable, wordTable, wordCategoryTable } from "$lib/db/schema";
 
 export const load = (async ({ params, url }) => {
   const categoryId = parseInt(params.id);
 
-  const cat = await db.query.category.findFirst({
-    where: eq(category.id, categoryId),
+  const cat = await db.query.categoryTable.findFirst({
+    where: eq(categoryTable.id, categoryId),
   });
 
   const words = await db
-    .select({ id: word.id, word: word.word })
-    .from(wordCategory)
-    .innerJoin(word, eq(wordCategory.wordId, word.id))
-    .innerJoin(category, eq(wordCategory.categoryId, category.id))
-    .where(eq(category.id, categoryId))
+    .select({ id: wordTable.id, word: wordTable.word })
+    .from(wordCategoryTable)
+    .innerJoin(wordTable, eq(wordCategoryTable.wordId, wordTable.id))
+    .innerJoin(
+      categoryTable,
+      eq(wordCategoryTable.categoryId, categoryTable.id),
+    )
+    .where(eq(categoryTable.id, categoryId))
     .limit(10);
 
   return {
