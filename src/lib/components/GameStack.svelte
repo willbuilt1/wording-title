@@ -12,7 +12,6 @@
   let incorrectStack: { id: number; word: string }[] = $state([]);
 
   $effect(() => {
-    console.log(answerCorrect);
     function moveCard(correct: boolean) {
       const removedCard = cardStack.pop();
       correct

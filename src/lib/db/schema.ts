@@ -22,8 +22,8 @@ export const category = pgTable("category", {
   ...baseMixin,
 });
 
-export const user = pgTable("user", {
-  email: varchar("email").notNull().unique(),
-  password: varchar("password").notNull(),
+export const userTable = pgTable("user", {
+  userId: varchar("user_id").notNull(),
+  email: varchar("email").unique(),
   ...baseMixin,
 });

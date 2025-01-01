@@ -1,11 +1,14 @@
 import { superValidate } from "sveltekit-superforms";
 import { zod } from "sveltekit-superforms/adapters";
 import { z } from "zod";
+import { message } from "sveltekit-superforms";
+import { error, fail, redirect } from "@sveltejs/kit";
+import { getOrCreateUser } from "$lib/utils/auth";
 
 // Define outside the load function so the adapter can be cached
 const schema = z.object({
-  name: z.string().default("Hello world!"),
   email: z.string().email(),
+  password: z.string().min(8),
 });
 
 export const load = async () => {
@@ -15,50 +18,45 @@ export const load = async () => {
   return { form };
 };
 
-import { message } from "sveltekit-superforms";
-import { fail, redirect } from "@sveltejs/kit";
-
 export const actions = {
-  // default: async ({ request }) => {
-  //   const form = await superValidate(request, zod(schema));
-  //   console.log(form);
+  signup: async ({ request, locals }) => {
+    const form = await superValidate(request, zod(schema));
+    const email = form.data.email;
+    const password = form.data.password;
 
-  //   if (!form.valid) {
-  //     // Again, return { form } and things will just work.
-  //     return fail(400, { form });
-  //   }
-
-  //   // TODO: Do something with the validated form.data
-
-  //   // Display a success status message
-  //   return message(form, "Form posted successfully!");
-  // },
-  signup: async ({ request, locals: { supabase } }) => {
-    const formData = await request.formData();
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
-
-    const { error } = await supabase.auth.signUp({ email, password });
+    if (!form.valid) {
+      return fail(400, { form });
+    }
+    const { error } = await locals.supabase.auth.signUp({ email, password });
     if (error) {
-      console.error(error);
-      redirect(303, "/auth/error");
+      return message(form, error.message);
     } else {
+      await getOrCreateUser(locals);
       redirect(303, "/");
     }
   },
   login: async ({ request, locals: { supabase } }) => {
-    const formData = await request.formData();
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
+    const form = await superValidate(request, zod(schema));
+    const email = form.data.email;
+    const password = form.data.password;
 
+    if (!form.valid) {
+      return fail(400, { form });
+    }
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
     if (error) {
-      console.error(error);
-      redirect(303, "/auth/error");
+      return message(form, { type: "error", message: error.message });
     } else {
+      redirect(303, "/");
+    }
+  },
+  signout: async ({ locals: { supabase, safeGetSession } }) => {
+    const { session } = await safeGetSession();
+    if (session) {
+      await supabase.auth.signOut();
       redirect(303, "/");
     }
   },

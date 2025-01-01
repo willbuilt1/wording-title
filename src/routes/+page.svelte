@@ -1,3 +1,13 @@
+<script>
+  const { data } = $props();
+  $inspect(data);
+  let { supabase, user } = $derived(data);
+
+  const logout = async () => {
+    const { error } = await supabase.auth.signOut();
+  };
+</script>
+
 <main class="fadeIn">
   <h1 class="headline">Wording Title</h1>
   <h2>The word guessing game</h2>
@@ -5,7 +15,14 @@
   <div class="buttons">
     <a href="/categories" class="button">Quick Start</a>
     <a href="/settings" class="button">Settings</a>
-    <a href="/login" class="button">Login</a>
+    {#if user}
+      <a href="/create" class="button">Create category</a>
+    {/if}
+    {#if user}
+      <button class="button" onclick={logout}>Logout</button>
+    {:else}
+      <a href="/login" class="button">Login</a>
+    {/if}
   </div>
 </main>
 

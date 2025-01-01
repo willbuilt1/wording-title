@@ -1,6 +1,15 @@
 <script>
+  import { redirect } from "@sveltejs/kit";
+
   let { data, children } = $props();
   let { supabase } = $derived(data);
+  $inspect(data);
+
+  $effect(() => {
+    if (!data.user) {
+      redirect(303, "/login");
+    }
+  });
 
   const logout = async () => {
     const { error } = await supabase.auth.signOut();
