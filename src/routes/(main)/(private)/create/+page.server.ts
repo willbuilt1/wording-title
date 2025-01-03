@@ -7,7 +7,10 @@ import {
   categoryTable as categorySchema,
   wordTable as wordSchema,
   wordCategoryTable as wordCategorySchema,
+  categoryUserTable as categoryUserSchema,
 } from "$lib/db/schema";
+import { getUser } from "$lib/utils/auth.js";
+import { error } from "console";
 
 // Define outside the load function so the adapter can be cached
 const schema = z.object({
@@ -23,10 +26,13 @@ export const load = async (event) => {
 };
 
 export const actions = {
-  default: async (event) => {
+  default: async ({ request, locals }) => {
     // const data = await request.formData();
-    const form = await superValidate(event, zod(schema));
-    console.log(form);
+    const user = await getUser(locals);
+    if (!user) {
+      return error(401, "Unauthorized");
+    }
+    const form = await superValidate(request, zod(schema));
     if (!form.valid) {
       // Again, return { form } and things will just work.
       return fail(400, { form });
@@ -41,7 +47,7 @@ export const actions = {
       await db.transaction(async (tx) => {
         const newCategory = await tx
           .insert(categorySchema)
-          .values({ name: formCategory, icon })
+          .values({ name: formCategory, icon, private: true })
           .returning();
 
         const wordIds = await tx
@@ -50,6 +56,10 @@ export const actions = {
           .returning()
           .then((res) => res.map((r) => r.id));
 
+        await tx.insert(categoryUserSchema).values({
+          categoryId: newCategory[0].id,
+          userId: user.id,
+        });
         await tx.insert(wordCategorySchema).values(
           wordIds.map((wordId) => ({
             wordId,

@@ -2,6 +2,16 @@ import { db } from "$lib/db";
 import { userTable } from "$lib/db/schema";
 import { eq } from "drizzle-orm";
 
+export async function getUser(locals: App.Locals) {
+  const { user } = await locals.safeGetSession();
+
+  if (!user) return null;
+
+  return await db.query.userTable.findFirst({
+    where: eq(userTable.userId, user.id),
+  });
+}
+
 export async function getOrCreateUser(locals: App.Locals) {
   const { user } = await locals.safeGetSession();
 

@@ -1,4 +1,4 @@
-import { bigint, integer, pgTable, text, varchar } from "drizzle-orm/pg-core";
+import { bigint, pgTable, text, varchar, boolean } from "drizzle-orm/pg-core";
 import { baseMixin } from "./mixins";
 
 export const wordTable = pgTable("word", {
@@ -19,6 +19,17 @@ export const wordCategoryTable = pgTable("word_category", {
 export const categoryTable = pgTable("category", {
   name: varchar("name").notNull(),
   icon: varchar("icon").notNull().default("❔"),
+  private: boolean("private").notNull().default(false),
+  ...baseMixin,
+});
+
+export const categoryUserTable = pgTable("category_user", {
+  categoryId: bigint("category_id", { mode: "number" })
+    .notNull()
+    .references(() => categoryTable.id),
+  userId: bigint("user_id", { mode: "number" })
+    .notNull()
+    .references(() => userTable.id),
   ...baseMixin,
 });
 

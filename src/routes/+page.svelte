@@ -13,7 +13,9 @@
   <h2>The word guessing game</h2>
 
   <div class="buttons">
-    <a href="/categories" class="button">Quick Start</a>
+    <a href="/categories" class="button"
+      >{user ? "Start game" : "Quick Start"}</a
+    >
     <a href="/settings" class="button">Settings</a>
     {#if user}
       <a href="/create" class="button">Create category</a>
