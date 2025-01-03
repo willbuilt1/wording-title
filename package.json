@@ -12,7 +12,8 @@
     "db": "supabase start",
     "db:status": "supabase status",
     "db:push": "drizzle-kit push",
-    "db:migrate": "supabase db diff",
+    "db:diff": "supabase db diff",
+    "db:migrate": "supabase migration new",
     "db:reset": "supabase db reset"
   },
   "devDependencies": {

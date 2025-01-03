@@ -16,7 +16,6 @@
   let { data } = $props<{ data: PageData }>();
   let showModal = $state(true);
   let gameStatus: TGameStatus = $state("initial");
-  console.log(data);
 
   const gameSettings = getGameState();
   const { lives, timerLength, color } = gameSettings.gameState;

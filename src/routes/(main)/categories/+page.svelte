@@ -3,7 +3,6 @@
   import type { PageData } from "./$types";
   import { getGameState } from "$lib/state/gameState.svelte";
   export let data: PageData;
-  console.log(data);
   const gameState = getGameState();
 
   const categoryColors = ["red", "gold", "green", "blue", "purple"];
