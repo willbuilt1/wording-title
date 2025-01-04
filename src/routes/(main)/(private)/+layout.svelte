@@ -3,7 +3,6 @@
 
   let { data, children } = $props();
   let { supabase } = $derived(data);
-  $inspect(data);
 
   $effect(() => {
     if (!data.user) {

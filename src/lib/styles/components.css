@@ -10,3 +10,18 @@
         background-color: var(--primary-grey);
     }
 }
+
+label {
+    display: block;
+    margin-bottom: var(--unit-medium);
+    font-weight: 700;
+  }
+  input {
+    margin-top: var(--unit-medium);
+    display: block;
+    width: 100%;
+    font-weight: 400;
+    height: var(--unit-xxxlarge);
+    border-radius: 8px;
+    padding-inline: var(--unit-medium);
+  }

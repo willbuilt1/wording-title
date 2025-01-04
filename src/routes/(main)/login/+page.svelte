@@ -26,9 +26,27 @@
       {...$constraints.password}
     />
   </label>
-  <button>Login</button>
-  <button formaction="?/signup">Sign up</button>
+  <div class="buttons">
+    <button class="button" disabled={!$form.email || !$form.password}
+      >Login</button
+    >
+    <button
+      formaction="?/signup"
+      class=" button"
+      disabled={!$form.email || !$form.password}>Sign up</button
+    >
+  </div>
   {#if $message}
     <div>{$message.message}</div>
   {/if}
 </form>
+
+<style>
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--unit-large);
+    margin-top: var(--unit-large);
+  }
+</style>
