@@ -44,9 +44,11 @@
   let score = $state(0);
   let numberOfLives = $state(lives);
   let answerCorrect = $state<boolean>();
+  let answerCount = $state(0);
 
   function handleAnswer(correct: boolean) {
     gameOver();
+    answerCount += 1;
     answerCorrect = correct;
   }
 
@@ -84,7 +86,11 @@
 </section>
 <h3>{data.category}</h3>
 <div class="cardContainer">
-  <GameStack cards={words} {color} {answerCorrect} />
+  <GameStack
+    cards={words}
+    {color}
+    answerCorrect={{ id: answerCount, correct: answerCorrect }}
+  />
 </div>
 <div class="buttonContainer">
   <div>
@@ -141,7 +147,7 @@
     margin-top: var(--unit-large);
   }
   .cardContainer {
-    width: 80vw;
+    max-width: 80vw;
     height: 200px;
     overflow: hidden;
     margin: 0 auto;

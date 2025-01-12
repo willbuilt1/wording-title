@@ -4,7 +4,7 @@
   let { cards, color, answerCorrect } = $props<{
     cards: { id: number; word: string }[];
     color?: string;
-    answerCorrect?: boolean;
+    answerCorrect?: { id: number; correct?: boolean };
   }>();
 
   let cardStack = $state(cards);
@@ -12,6 +12,8 @@
   let incorrectStack: { id: number; word: string }[] = $state([]);
 
   $effect(() => {
+    answerCorrect;
+    $inspect(answerCorrect);
     function moveCard(correct: boolean) {
       const removedCard = cardStack.pop();
       correct
@@ -19,11 +21,11 @@
         : incorrectStack.push(removedCard!);
     }
     if (!document.startViewTransition) {
-      if (answerCorrect !== undefined) moveCard(answerCorrect);
+      if (answerCorrect.id !== 0) moveCard(answerCorrect);
       return;
     }
     document.startViewTransition(() => {
-      if (answerCorrect !== undefined) moveCard(answerCorrect);
+      if (answerCorrect.id !== 0) moveCard(answerCorrect);
     });
   });
 </script>
